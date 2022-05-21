@@ -5,7 +5,7 @@ const firebaseConfig = {
   projectId: process.env.APP_PROJECT_ID,
   storageBucket: process.env.APP_STORAGE_BUCKET,
   appId: process.env.APP_APP_ID,
-  measurementId: process.env.APP_MEASUREMENT_ID,
+  // measurementId: process.env.APP_MEASUREMENT_ID,
 };
 
 export default firebaseConfig;
