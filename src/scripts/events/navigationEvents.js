@@ -1,5 +1,5 @@
-import { getAuthors } from '../../api/authorData';
-import { getBooks } from '../../api/bookData';
+import { getAuthors, favAuthors } from '../../api/authorData';
+import { booksOnSale, getBooks } from '../../api/bookData';
 import { showAuthors } from '../components/pages/authors';
 import { showBooks } from '../components/pages/books';
 import signOut from '../helpers/auth/signOut';
@@ -12,7 +12,7 @@ const navigationEvents = () => {
 
   // TODO: BOOKS ON SALE
   document.querySelector('#sale-books').addEventListener('click', () => {
-    console.warn('CLICKED SALE BOOKS');
+    booksOnSale().then((saleBooksArray) => showBooks(saleBooksArray));
   });
 
   // TODO: ALL BOOKS
@@ -30,7 +30,7 @@ const navigationEvents = () => {
 
   // Favorite Authors
   document.querySelector('#fav-authors').addEventListener('click', () => {
-    getAuthors().then((favAuthors) => showAuthors(favAuthors));
+    favAuthors().then((starAuthors) => showAuthors(starAuthors));
   });
 
   // STRETCH: SEARCH

@@ -24,7 +24,11 @@ const createBook = () => {};
 const updateBook = () => {};
 
 // TODO: FILTER BOOKS ON SALE
-const booksOnSale = () => {};
+const booksOnSale = () => new Promise((resolve, reject) => {
+  axios.get(`${dbUrl}books/.json?orderBy="sale"&equalTo=true `)
+    .then((response) => resolve(Object.value(response.data)))
+    .catch((error) => reject(error));
+});
 
 // TODO: STRETCH...SEARCH BOOKS
 

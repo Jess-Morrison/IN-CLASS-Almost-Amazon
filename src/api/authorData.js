@@ -18,11 +18,17 @@ const createAuthor = () => new Promise((resolve, reject) => {
 });
 
 // Favorite Author
-const favAuthors = (firebaseKey) => new Promise((resolve, reject) => {
-  axios.get(`{dbUrl}/authors/ ${firebaseKey}.json`)
-    .then(() => {
-      getAuthors().then((authorArray) => resolve(authorArray));
-    })
+// const favAuthors = (firebaseKey) => new Promise((resolve, reject) => {
+//   axios.get(`{dbUrl}/authors/ ${firebaseKey}.json`)
+//     .then(() => {
+//       getAuthors().then((authorArray) => resolve(authorArray));
+//     })
+//     .catch((error) => reject(error));
+// });
+
+const favAuthors = () => new Promise((resolve, reject) => {
+  axios.get(`${dbUrl}/authors.json?orderBy="favorite"&equalTo=true`)
+    .then((response) => resolve(Object.values(response.data)))
     .catch((error) => reject(error));
 });
 
