@@ -1,3 +1,6 @@
+import { favAuthors } from '../../api/authorData';
+import { showAuthors } from '../components/pages/authors';
+
 const domEvents = () => {
   document.querySelector('#main-container').addEventListener('click', (e) => {
     // TODO: CLICK EVENT FOR DELETING A BOOK
@@ -32,6 +35,11 @@ const domEvents = () => {
         console.warn('DELETE AUTHOR', e.target.id);
         console.warn(e.target.id.split('--'));
       }
+    }
+    // Fav Author
+    if (e.target.id.includes('fav-author')) {
+      const [, firebaseKey] = e.target.id.split('--');
+      favAuthors(firebaseKey).then((authorArray) => showAuthors(authorArray));
     }
 
     // FIXME: ADD CLICK EVENT FOR SHOWING FORM FOR ADDING AN AUTHOR
