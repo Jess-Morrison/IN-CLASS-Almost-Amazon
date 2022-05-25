@@ -19,6 +19,7 @@ const showAuthors = (array) => {
         <i class="btn btn-success fas fa-eye" id="view-author-btn--${item.firebaseKey}"></i>
         <i class="fas fa-edit btn btn-info" id="update-author--${item.firebaseKey}"></i>
         <i class="btn btn-danger fas fa-trash-alt" id="delete-author-btn--${item.firebaseKey}"></i>
+        <i class="fas fa-fav btn btn-star" style="background-color:yellow" id="fav-author--${item.firebaseKey}"></i>
       </div>
     </div>
     `;

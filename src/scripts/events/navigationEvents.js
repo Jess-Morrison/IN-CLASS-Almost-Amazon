@@ -28,6 +28,11 @@ const navigationEvents = () => {
     getAuthors().then((authorsArray) => showAuthors(authorsArray));
   });
 
+  // Favorite Authors
+  document.querySelector('#fav-authors').addEventListener('click', () => {
+    getAuthors().then((favAuthors) => showAuthors(favAuthors));
+  });
+
   // STRETCH: SEARCH
   document.querySelector('#search').addEventListener('keyup', (e) => {
     const searchValue = document.querySelector('#search').value.toLowerCase();

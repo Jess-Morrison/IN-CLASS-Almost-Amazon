@@ -17,6 +17,15 @@ const createAuthor = () => new Promise((resolve, reject) => {
     .catch((error) => reject(error));
 });
 
+// Favorite Author
+const favAuthors = (firebaseKey) => new Promise((resolve, reject) => {
+  axios.get(`{dbUrl}/authors/ ${firebaseKey}.json`)
+    .then(() => {
+      getAuthors().then((authorArray) => resolve(authorArray));
+    })
+    .catch((error) => reject(error));
+});
+
 // FIXME: GET SINGLE AUTHOR
 // const getSingleAuthor = () => new Promise ((resolve, reject) => {
 //  axios.get(`${dbUrl}/authors.json${firebaseKey}`)
@@ -39,6 +48,7 @@ export {
   createAuthor,
   // getSingleAuthor,
   // deleteSingleAuthor,
+  favAuthors,
   updateAuthor,
   getAuthorBooks,
 };
