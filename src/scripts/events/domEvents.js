@@ -1,5 +1,7 @@
 import { favAuthors } from '../../api/authorData';
+import { deleteBook } from '../../api/bookData';
 import { showAuthors } from '../components/pages/authors';
+import { showBooks } from '../components/pages/books';
 
 const domEvents = () => {
   document.querySelector('#main-container').addEventListener('click', (e) => {
@@ -7,7 +9,6 @@ const domEvents = () => {
     if (e.target.id.includes('delete-book')) {
       // eslint-disable-next-line no-alert
       if (window.confirm('Want to delete?')) {
-        console.warn('CLICKED DELETE BOOK', e.target.id);
         console.warn(e.target.id.split('--'));
       }
     }
@@ -32,16 +33,17 @@ const domEvents = () => {
     if (e.target.id.includes('delete-author-btn')) {
       // eslint-disable-next-line no-alert
       if (window.confirm('Want to delete?')) {
-        console.warn('DELETE AUTHOR', e.target.id);
-        console.warn(e.target.id.split('--'));
+        const [, firebaseKey] = e.target.id.split('--');
+        deleteBook(firebaseKey).then((booksArray) => showBooks(booksArray));
       }
     }
     // Fav Author
     if (e.target.id.includes('fav-author')) {
       const [, firebaseKey] = e.target.id.split('--');
       favAuthors(firebaseKey).then((authorArray) => showAuthors(authorArray));
+      console.warn(firebaseKey);
+      favAuthors.favorite = !favAuthors.favorite;
     }
-
     // FIXME: ADD CLICK EVENT FOR SHOWING FORM FOR ADDING AN AUTHOR
     if (e.target.id.includes('add-author-btn')) {
       console.warn('ADD AUTHOR');
