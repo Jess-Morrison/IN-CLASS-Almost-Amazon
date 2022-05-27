@@ -40,8 +40,13 @@ const favAuthors = () => new Promise((resolve, reject) => {
 // });
 
 // FIXME: DELETE AUTHOR
-// const deleteSingleAuthor = () => new Promise ((resolve, reject) =>{
-// });
+const deleteSingleAuthor = (firebaseKey) => new Promise((resolve, reject) => {
+  axios.delete(`${dbUrl}/authors/${firebaseKey}.json`)
+    .then(() => {
+      getAuthors().then((authorsArray) => resolve(authorsArray));
+    })
+    .catch((error) => reject(error));
+});
 
 // FIXME: UPDATE AUTHOR
 const updateAuthor = () => {};
@@ -53,7 +58,7 @@ export {
   getAuthors,
   createAuthor,
   // getSingleAuthor,
-  // deleteSingleAuthor,
+  deleteSingleAuthor,
   favAuthors,
   updateAuthor,
   getAuthorBooks,

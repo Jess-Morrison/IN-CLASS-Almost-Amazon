@@ -1,4 +1,4 @@
-import { favAuthors } from '../../api/authorData';
+import { deleteSingleAuthor, favAuthors } from '../../api/authorData';
 import { deleteBook } from '../../api/bookData';
 import { showAuthors } from '../components/pages/authors';
 import { showBooks } from '../components/pages/books';
@@ -10,6 +10,8 @@ const domEvents = () => {
       // eslint-disable-next-line no-alert
       if (window.confirm('Want to delete?')) {
         console.warn(e.target.id.split('--'));
+        const [, firebaseKey] = e.target.id.split('--');
+        deleteSingleAuthor(firebaseKey).then((authorsArray) => showAuthors(authorsArray));
       }
     }
 
