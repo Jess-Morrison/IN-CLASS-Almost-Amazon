@@ -1,7 +1,6 @@
 import axios from 'axios';
 // import { showBooks } from '../scripts/components/pages/books';
 import firebaseConfig from './apiKeys';
-import { getBooks } from './bookData';
 
 const dbUrl = firebaseConfig.databaseURL;
 
@@ -13,10 +12,18 @@ const getAuthors = () => new Promise((resolve, reject) => {
 });
 
 // FIXME: CREATE AUTHOR
-const createAuthor = () => new Promise((resolve, reject) => {
-  axios.post(`${dbUrl}/authors.json`)
-    .then((response) => resolve(Object.values(response.data)))
-    .catch((error) => reject(error));
+const createAuthor = (authorObj) => new Promise((resolve, reject) => {
+  axios.post(`${dbUrl}/authors.json`, authorObj)
+    .then((response) => {
+      const payload = {
+        firebaseKey: response.data
+          .name
+      };
+      axios.patch(`${dbUrl}/authors/${response.data.name}.json`, payload)
+        .then(() => {
+          getAuthors().then(resolve);
+        });
+    }).catch(reject);
 });
 
 // Favorite Author
@@ -57,10 +64,8 @@ const updateAuthor = () => {};
 // eslint-disable-next-line camelcase
 const getAuthorBooks = (author_id) => new Promise((resolve, reject) => {
   // eslint-disable-next-line camelcase
-  axios.get(`${dbUrl}/books/${author_id}.json`)
-    .then(() => {
-      getBooks().then((authorBooks) => resolve(authorBooks));
-    })
+  axios.get(`${dbUrl}/books.json?orderBy="author_id"&equalTo="${author_id}"`)
+    .then((response) => resolve(Object.values(response.data)))
     .catch((error) => reject(error));
 });
 

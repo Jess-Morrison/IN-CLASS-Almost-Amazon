@@ -1,9 +1,9 @@
 import clearDom from '../../helpers/clearDom';
 import renderToDOM from '../../helpers/renderToDom';
 
-const viewBook = (obj) => {
+// const authorName =first_name.concat(last_name)
+const viewAuth = (obj) => {
   clearDom();
-
   const domString = `
   <div class="mt-5 d-flex flex-wrap">
    <div class="d-flex flex-column">
@@ -26,4 +26,4 @@ const viewBook = (obj) => {
   renderToDOM('#view', domString);
 };
 
-export default viewBook;
+export default viewAuth;

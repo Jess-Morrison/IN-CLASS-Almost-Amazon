@@ -1,5 +1,5 @@
 import { getAuthorBooks, getSingleAuthor } from './authorData';
-import { getBooks, getSingleBook } from './bookData';
+import { getSingleBook } from './bookData';
 
 const viewBookDetails = (bookFirebaseKey) => new Promise((resolve, reject) => {
   getSingleBook(bookFirebaseKey)
@@ -11,13 +11,22 @@ const viewBookDetails = (bookFirebaseKey) => new Promise((resolve, reject) => {
 });
 
 const viewAuthorDetails = (authorFirebaseKey) => new Promise((resolve, reject) => {
-  getAuthorBooks(authorFirebaseKey)
-    .then((authorObject) => {
-      getBooks(authorObject.author_id)
-        .then((bookObject) => {
-          resolve({ bookObject, ...authorObject });
-        });
+  getSingleAuthor(authorFirebaseKey)
+    .then((authorsObject) => {
+      console.warn(authorsObject);
+      getAuthorBooks(authorFirebaseKey).then((authBooks) => {
+        resolve({ authBooks, ...authorsObject });
+      });
     }).catch((error) => reject(error));
 });
+  // getBooks(authorFirebaseKey)
+  //   .then((authorObject, firstName, lastName) => {
+  //     getSingleAuthor(authorObject.author_id)
+  //       .then((bookObject) => {
+  //         resolve({
+  //           bookObject, ...authorObject, firstName, lastName
+  //         });
+  //       });
+  //   }).catch((error) => reject(error));
 
 export { viewBookDetails, viewAuthorDetails };
