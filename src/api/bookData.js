@@ -1,4 +1,5 @@
 import axios from 'axios';
+// import { showBooks } from '../scripts/components/pages/books';
 import firebaseConfig from './apiKeys';
 // API CALLS FOR BOOKS
 
@@ -21,7 +22,11 @@ const deleteBook = (firebaseKey) => new Promise((resolve, reject) => {
 });
 
 // TODO: GET SINGLE BOOK
-const getSingleBook = () => {};
+const getSingleBook = (firebaseKey) => new Promise((resolve, reject) => {
+  axios.get(`${dbUrl}/books/${firebaseKey}.json`)
+    .then((response) => resolve(response.data))
+    .catch((error) => reject(error));
+});
 
 // TODO: CREATE BOOK
 const createBook = () => {};

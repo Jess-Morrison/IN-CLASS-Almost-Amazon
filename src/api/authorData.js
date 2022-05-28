@@ -1,5 +1,7 @@
 import axios from 'axios';
+// import { showBooks } from '../scripts/components/pages/books';
 import firebaseConfig from './apiKeys';
+import { getBooks } from './bookData';
 
 const dbUrl = firebaseConfig.databaseURL;
 
@@ -33,11 +35,11 @@ const favAuthors = () => new Promise((resolve, reject) => {
 });
 
 // FIXME: GET SINGLE AUTHOR
-// const getSingleAuthor = () => new Promise ((resolve, reject) => {
-//  axios.get(`${dbUrl}/authors.json${firebaseKey}`)
-//   .then((response) => resolve(Object.values(response.data)))
-//   .catch((error) => reject(error));
-// });
+const getSingleAuthor = (firebaseKey) => new Promise((resolve, reject) => {
+  axios.get(`${dbUrl}/authors/${firebaseKey}.json`)
+    .then((response) => resolve(response.data))
+    .catch((error) => reject(error));
+});
 
 // FIXME: DELETE AUTHOR
 const deleteSingleAuthor = (firebaseKey) => new Promise((resolve, reject) => {
@@ -52,12 +54,20 @@ const deleteSingleAuthor = (firebaseKey) => new Promise((resolve, reject) => {
 const updateAuthor = () => {};
 
 // TODO: GET A SINGLE AUTHOR'S BOOKS
-const getAuthorBooks = () => {};
+// eslint-disable-next-line camelcase
+const getAuthorBooks = (author_id) => new Promise((resolve, reject) => {
+  // eslint-disable-next-line camelcase
+  axios.get(`${dbUrl}/books/${author_id}.json`)
+    .then(() => {
+      getBooks().then((authorBooks) => resolve(authorBooks));
+    })
+    .catch((error) => reject(error));
+});
 
 export {
   getAuthors,
   createAuthor,
-  // getSingleAuthor,
+  getSingleAuthor,
   deleteSingleAuthor,
   favAuthors,
   updateAuthor,
