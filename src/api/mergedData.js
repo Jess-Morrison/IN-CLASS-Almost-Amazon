@@ -14,19 +14,11 @@ const viewAuthorDetails = (authorFirebaseKey) => new Promise((resolve, reject) =
   getSingleAuthor(authorFirebaseKey)
     .then((authorsObject) => {
       console.warn(authorsObject);
-      getAuthorBooks(authorFirebaseKey).then((authBooks) => {
-        resolve({ authBooks, ...authorsObject });
+      getAuthorBooks(authorsObject.firebaseKey).then((authBooks) => {
+        // console.warn(authBooks);
+        resolve({ authorsObject, authBooks });
       });
     }).catch((error) => reject(error));
 });
-  // getBooks(authorFirebaseKey)
-  //   .then((authorObject, firstName, lastName) => {
-  //     getSingleAuthor(authorObject.author_id)
-  //       .then((bookObject) => {
-  //         resolve({
-  //           bookObject, ...authorObject, firstName, lastName
-  //         });
-  //       });
-  //   }).catch((error) => reject(error));
 
 export { viewBookDetails, viewAuthorDetails };

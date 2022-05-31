@@ -65,7 +65,7 @@ const updateAuthor = () => {};
 const getAuthorBooks = (author_id) => new Promise((resolve, reject) => {
   // eslint-disable-next-line camelcase
   axios.get(`${dbUrl}/books.json?orderBy="author_id"&equalTo="${author_id}"`)
-    .then((response) => resolve(Object.values(response.data)))
+    .then((response) => resolve(response.data))
     .catch((error) => reject(error));
 });
 
