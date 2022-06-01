@@ -15,7 +15,7 @@ const domEvents = () => {
       if (window.confirm('Want to delete?')) {
         console.warn(e.target.id.split('--'));
         const [, firebaseKey] = e.target.id.split('--');
-        deleteBook(firebaseKey).then((booksArray) => showBooks(booksArray));
+        deleteBook(firebaseKey.uid).then((booksArray) => showBooks(booksArray));
       }
     }
 

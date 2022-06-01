@@ -2,7 +2,7 @@ import { createBook, getSingleBook, updateBook } from '../../api/bookData';
 
 import { showBooks } from '../components/pages/books';
 
-const formEvents = () => {
+const formEvents = (uid) => {
   document.querySelector('#main-container').addEventListener('submit', (e) => {
     e.preventDefault();
     // TODO: CLICK EVENT FOR SUBMITTING FORM FOR ADDING A BOOK
@@ -14,6 +14,7 @@ const formEvents = () => {
         price: document.querySelector('#price').value,
         sale: document.querySelector('#sale').checked,
         author: document.querySelector('#author_id').value,
+        uid
       };
       // const [, firebaseKey] = e.target.id.split('--');
       console.warn('CLICKED SUBMIT BOOK', e.target.id);
