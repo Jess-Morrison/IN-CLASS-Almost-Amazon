@@ -6,7 +6,7 @@ const dbUrl = firebaseConfig.databaseURL;
 
 // FIXME:  GET ALL AUTHORS
 const getAuthors = (uid) => new Promise((resolve, reject) => {
-  axios.get(`${dbUrl}/authors.json?orderBy="${uid}"&equalTo="${uid}"`)
+  axios.get(`${dbUrl}/authors.json?orderBy="uid"&equalTo="${uid}"`)
     .then((response) => {
       if (response.data) {
         resolve(Object.values(response.data));

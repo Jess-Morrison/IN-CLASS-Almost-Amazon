@@ -12,7 +12,7 @@ const viewAuth = (obj) => {
 
   // if (obj.length) {
   let domStringb = '';
-  obj.forEach((item) => {
+  obj.bookObject.forEach((item) => {
     domStringb += `
         <div class="card">
           <img class="card-img-top" src=${item.image} alt=${item.title} style="height: 400px;">
@@ -27,7 +27,7 @@ const viewAuth = (obj) => {
         </div>`;
   });
   renderToDOM('#view', domString);
-  renderToDOM('#strong', domStringb);
+  renderToDOM('#store', domStringb);
   // }
 };
 export default viewAuth;
