@@ -18,7 +18,7 @@ const formEvents = (uid) => {
       };
       // const [, firebaseKey] = e.target.id.split('--');
       console.warn('CLICKED SUBMIT BOOK', e.target.id);
-      createBook(bookInput).then((submitBook) => showBooks(submitBook));
+      createBook(bookInput).then((booksArray) => showBooks(booksArray));
     }
 
     // TODO: CLICK EVENT FOR EDITING A BOOK
