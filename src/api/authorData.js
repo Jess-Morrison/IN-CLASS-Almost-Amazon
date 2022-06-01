@@ -6,7 +6,7 @@ const dbUrl = firebaseConfig.databaseURL;
 
 // FIXME:  GET ALL AUTHORS
 const getAuthors = (uid) => new Promise((resolve, reject) => {
-  axios.get(`${dbUrl}/authors.json?orderBy="${uid}"&equalTo="${uid}"`)
+  axios.get(`${dbUrl}/authors.json?orderBy="uid"&equalTo="${uid}"`)
     .then((response) => {
       if (response.data) {
         resolve(Object.values(response.data));
@@ -64,7 +64,11 @@ const deleteSingleAuthor = (firebaseKey, uid) => new Promise((resolve, reject) =
 });
 
 // FIXME: UPDATE AUTHOR
-const updateAuthor = () => {};
+const updateAuthor = (authObj, uid) => new Promise((resolve, reject) => {
+  axios.patch(`${dbUrl}/authors/${authObj.firebaseKey}.json`, authObj, uid)
+    .then(() => getAuthors().then(resolve))
+    .catch(reject);
+});
 
 // TODO: GET A SINGLE AUTHOR'S BOOKS
 // eslint-disable-next-line camelcase
