@@ -1,4 +1,4 @@
-import { updateAuthor } from '../../api/authorData';
+import { getSingleAuthor, updateAuthor } from '../../api/authorData';
 import { createBook, getSingleBook, updateBook } from '../../api/bookData';
 import { showAuthors } from '../components/pages/authors';
 
@@ -50,9 +50,24 @@ const formEvents = (uid) => {
         last_name: document.querySelector('#last_name').value,
         favorite: document.querySelector('#favorite').value,
       };
-      updateAuthor(authorInput).then((showAuthors));
+      updateAuthor(authorInput).then(showAuthors);
     }
+
     // FIXME:ADD CLICK EVENT FOR EDITING AN AUTHOR
+    if (e.target.id.includes('update-author')) {
+      getSingleAuthor().then(() => {
+        const [, firebaseKey] = e.target.id.split('--');
+        const authorInput = {
+          email: document.querySelector('#email').value,
+          first_name: document.querySelector('#first_name').value,
+          last_name: document.querySelector('#last_name').value,
+          favorite: document.querySelector('#favorite').value,
+          uid,
+          firebaseKey
+        };
+        updateAuthor(authorInput).then(showAuthors);
+      });
+    }
   });
 };
 

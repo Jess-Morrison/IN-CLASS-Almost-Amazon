@@ -1,4 +1,4 @@
-import { deleteSingleAuthor, favAuthors, getSingleAuthor } from '../../api/authorData';
+import { deleteSingleAuthor, getSingleAuthor } from '../../api/authorData';
 import { deleteBook, getSingleBook } from '../../api/bookData';
 import { viewAuthorDetails, viewBookDetails } from '../../api/mergedData';
 import addAuthorForm from '../components/forms/addAuthorForm';
@@ -49,15 +49,15 @@ const domEvents = () => {
     // Viewing Author event
     if (e.target.id.includes('view-author-btn')) {
       const [, authorFirebaseKey] = e.target.id.split('--');
-      viewAuthorDetails(authorFirebaseKey).then((authBookObj) => viewAuth(authBookObj));
+      viewAuthorDetails(authorFirebaseKey).then((authBook) => viewAuth(authBook));
     }
     // Fav Author
-    if (e.target.id.includes('fav-author')) {
-      const [, firebaseKey] = e.target.id.split('--');
-      favAuthors(firebaseKey).then((authorArray) => showAuthors(authorArray));
-      console.warn(firebaseKey);
-      favAuthors.favorite = !favAuthors.favorite;
-    }
+    // if (e.target.id.includes('fav-author')) {
+    //   const [, firebaseKey] = e.target.id.split('--');
+    //   favAuthors(firebaseKey).then((authorArray) => showAuthors(authorArray));
+    //   console.warn(firebaseKey);
+    //   favAuthors.favorite = !favAuthors.favorite;
+    // }
     // FIXME: ADD CLICK EVENT FOR SHOWING FORM FOR ADDING AN AUTHOR
     if (e.target.id.includes('add-author-btn')) {
       console.warn('ADD AUTHOR');

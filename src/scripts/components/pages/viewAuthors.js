@@ -4,15 +4,18 @@ import renderToDOM from '../../helpers/renderToDom';
 // const authorName =first_name.concat(last_name)
 const viewAuth = (obj) => {
   clearDom();
-  const domString = `
+  let domString = ' ';
+  domString += `
   <div class="text-white ms-5 details">
-  <h5>${obj.title} by ${obj.authorObject.first_name} ${obj.authorObject.last_name} ${obj.authorObject.favorite ? '<span class="badge bg-danger"><i class="fa fa-heart" aria-hidden="true"></i></span>' : ''}</h5>
-  Author Email: <a href="mailto:${obj.authorObject.email}">${obj.authorObject.email}</a>
+  <h5> ${obj.first_name} ${obj.last_name} ${obj.favorite ? '<span class="badge bg-danger"><i class="fa fa-heart" aria-hidden="true"></i></span>' : ''}</h5>
+  Author Email: <a href="mailto:${obj.email}">${obj.email}</a>
     `;
+  renderToDOM('#view', domString);
 
   // if (obj.length) {
   let domStringb = '';
-  obj.bookObject.forEach((item) => {
+  obj.authBooks.forEach((item) => {
+    // console.warn(obj.bookObject);
     domStringb += `
         <div class="card">
           <img class="card-img-top" src=${item.image} alt=${item.title} style="height: 400px;">
@@ -26,7 +29,6 @@ const viewAuth = (obj) => {
           </div>
         </div>`;
   });
-  renderToDOM('#view', domString);
   renderToDOM('#store', domStringb);
   // }
 };

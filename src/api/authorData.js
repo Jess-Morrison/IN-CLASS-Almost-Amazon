@@ -5,8 +5,9 @@ import firebaseConfig from './apiKeys';
 const dbUrl = firebaseConfig.databaseURL;
 
 // FIXME:  GET ALL AUTHORS
-const getAuthors = (uid) => new Promise((resolve, reject) => {
-  axios.get(`${dbUrl}/authors.json?orderBy="uid"&equalTo="${uid}"`)
+const getAuthors = () => new Promise((resolve, reject) => {
+  // axios.get(`${dbUrl}/authors.json?orderBy="uid"&equalTo="${uid}"`)
+  axios.get(`${dbUrl}/authors.json`)
     .then((response) => {
       if (response.data) {
         resolve(Object.values(response.data));
@@ -75,7 +76,7 @@ const updateAuthor = (authObj, uid) => new Promise((resolve, reject) => {
 const getAuthorBooks = (author_id) => new Promise((resolve, reject) => {
   // eslint-disable-next-line camelcase
   axios.get(`${dbUrl}/books.json?orderBy="author_id"&equalTo="${author_id}"`)
-    .then((response) => resolve(response.data))
+    .then((response) => resolve(Object.values(response.data)))
     .catch((error) => reject(error));
 });
 
