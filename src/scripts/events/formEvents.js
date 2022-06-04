@@ -1,4 +1,4 @@
-import { getSingleAuthor, updateAuthor } from '../../api/authorData';
+import { createAuthor, getSingleAuthor, updateAuthor } from '../../api/authorData';
 import { createBook, getSingleBook, updateBook } from '../../api/bookData';
 import { showAuthors } from '../components/pages/authors';
 
@@ -52,7 +52,7 @@ const formEvents = (uid) => {
         favorite: document.querySelector('#favorite').checked,
         uid
       };
-      updateAuthor(authorInput, uid).then((submitAutor) => showAuthors(submitAutor));
+      createAuthor(authorInput, uid).then((submitAuthor) => showAuthors(submitAuthor));
     }
 
     // FIXME:ADD CLICK EVENT FOR EDITING AN AUTHOR
