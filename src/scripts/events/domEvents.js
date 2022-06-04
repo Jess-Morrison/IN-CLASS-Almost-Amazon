@@ -15,15 +15,15 @@ const domEvents = () => {
       // eslint-disable-next-line no-alert
       if (window.confirm('Want to delete?')) {
         console.warn(e.target.id.split('--'));
-        const [, firebaseKey] = e.target.id.split('--');
-        deleteBook(firebaseKey.uid).then((booksArray) => showBooks(booksArray));
+        const [firebaseKey, uid] = e.target.id.split('--');
+        deleteBook(firebaseKey, uid).then((booksArray) => showBooks(booksArray));
       }
     }
 
     // TODO: CLICK EVENT FOR SHOWING FORM FOR ADDING A BOOK
     if (e.target.id.includes('add-book-btn')) {
-      const [, firebaseKey] = e.target.id.split('--');
-      addBookForm(firebaseKey).then((newBook) => showBooks(newBook));
+      const [firebaseKey, uid] = e.target.id.split('--');
+      addBookForm(firebaseKey, uid).then(showBooks);
     }
 
     // TODO: CLICK EVENT EDITING/UPDATING A BOOK
@@ -62,7 +62,7 @@ const domEvents = () => {
     if (e.target.id.includes('add-author-btn')) {
       console.warn('ADD AUTHOR');
       const [, firebaseKey] = e.target.id.split('--');
-      addAuthorForm(firebaseKey).then(showAuthors);
+      addAuthorForm(firebaseKey).then((authorsObject) => showAuthors(authorsObject));
     }
     // FIXME: ADD CLICK EVENT FOR EDITING AN AUTHOR
     if (e.target.id.includes('submit-author')) {

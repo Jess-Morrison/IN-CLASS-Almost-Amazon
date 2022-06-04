@@ -20,7 +20,7 @@ const formEvents = (uid) => {
       };
       // const [, firebaseKey] = e.target.id.split('--');
       console.warn('CLICKED SUBMIT BOOK', e.target.id);
-      createBook(bookInput).then((booksArray) => showBooks(booksArray));
+      createBook(bookInput, uid).then((booksArray) => showBooks(booksArray));
     }
 
     // TODO: CLICK EVENT FOR EDITING A BOOK
@@ -34,10 +34,11 @@ const formEvents = (uid) => {
           price: document.querySelector('#price').value,
           sale: document.querySelector('#sale').checked,
           author: document.querySelector('#author_id').value,
-          firebaseKey
+          firebaseKey,
+          uid
         };
         console.warn('CLICKED Update BOOK', e.target.id);
-        updateBook(bookInput).then((submitBook) => showBooks(submitBook));
+        updateBook(bookInput, uid).then((submitBook) => showBooks(submitBook));
       });
     }
 
@@ -48,9 +49,10 @@ const formEvents = (uid) => {
         email: document.querySelector('#email').value,
         first_name: document.querySelector('#first_name').value,
         last_name: document.querySelector('#last_name').value,
-        favorite: document.querySelector('#favorite').value,
+        favorite: document.querySelector('#favorite').checked,
+        uid
       };
-      updateAuthor(authorInput).then(showAuthors);
+      updateAuthor(authorInput, uid).then((submitAutor) => showAuthors(submitAutor));
     }
 
     // FIXME:ADD CLICK EVENT FOR EDITING AN AUTHOR
@@ -61,11 +63,11 @@ const formEvents = (uid) => {
           email: document.querySelector('#email').value,
           first_name: document.querySelector('#first_name').value,
           last_name: document.querySelector('#last_name').value,
-          favorite: document.querySelector('#favorite').value,
+          favorite: document.querySelector('#favorite').checked,
           uid,
           firebaseKey
         };
-        updateAuthor(authorInput).then(showAuthors);
+        updateAuthor(authorInput, uid).then(showAuthors);
       });
     }
   });
